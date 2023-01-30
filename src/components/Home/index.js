@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import LogoTitle from '../../assets/images/logo-s.png'
 import AnimatedLetters from '../AnimatedLetters';
 import './index.scss';
+import Logo from './Logo';
 
 const Home = () => {
     const [letterClass, setLetterClass] = useState('text-animate')
@@ -10,10 +11,15 @@ const Home = () => {
     const jobArray = ['w', 'e', 'b', ' ', 'd', 'e', 'v', 'e', 'l', 'o', 'p', 'e', 'r', '.']
     
     useEffect(() => {
-        return setTimeout(() => {
-            setLetterClass('text-animate-hover')
-        }, 4000)
-    }, [])
+        let timeout;
+        timeout = setTimeout(() => {
+            setLetterClass("text-animate-hover");
+        }, 4000);
+
+        return () => {
+            clearTimeout(timeout);
+        };
+        }, []);
 
     return (
         <div className="container home-page">
@@ -36,7 +42,7 @@ const Home = () => {
                 <h2>Front End Developer / JavaScript Expert / YouTuber</h2>
                 <Link to='/contact' className='flat-button'>CONTACT ME</Link>
             </div>
-
+            <Logo />
         </div>
     )
 }
